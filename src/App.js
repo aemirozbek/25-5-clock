@@ -4,18 +4,24 @@ import { useState } from "react";
 function App() {
   const [breakLength, setBreakLength] = useState(5)
   const [sessionLength, setSessionLength] = useState(25)
-  const [timeLeft, setTimeLeft] = useState({minutes: sessionLength*60, seconds: 0})
-  const [timer, setTimer] = useState(0)
-  let start
+  const [timeLeft, setTimeLeft] = useState({minutes: sessionLength, seconds: 0})
+  let start, time, minutes, seconds
 
   function handleStartStop(sessionLengthParameter) {
-    setTimeLeft(sessionLengthParameter)
     start = Date.now()
-    timerFunction(sessionLengthParameter)
+    timerFunction(sessionLengthParameter*60)
   }
   function timerFunction(sessionLengthParameter) {
     setInterval(() => {
-      setTimeLeft(sessionLengthParameter - (((Date.now() - start)/1000).toFixed(0)))
+      time = sessionLengthParameter - (((Date.now() - start)/1000).toFixed(0))
+      minutes = Math.floor(time/60)
+      seconds = time-(minutes*60)
+      setTimeLeft(
+        {
+          minutes: minutes,
+          seconds: seconds
+        }
+      ) 
     }, 1000);
   }
 console.log(timeLeft)
@@ -32,7 +38,7 @@ console.log(timeLeft)
       <button id="session-increment" onClick={()=>{setSessionLength(prev=>prev<60 ? prev+1 : prev)}}>+</button>
 
       <div id="timer-label">{"Session"}</div>
-      <div id="time-left">{sessionLength}</div>
+      <div id="time-left">{timeLeft.seconds<10 ? `${timeLeft.minutes}:0${timeLeft.seconds}` : `${timeLeft.minutes}:${timeLeft.seconds}`}</div>
 
 
       <button id="start_stop" onClick={()=>handleStartStop(sessionLength)}>Start Stop</button>
