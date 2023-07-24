@@ -1,28 +1,50 @@
 import { useState } from "react";
 
+  let running = false
+  let pausedOnce = false
+  let start, time, minutes, seconds, timerInterval, totalTimeLeft
 
 function App() {
   const [breakLength, setBreakLength] = useState(5)
   const [sessionLength, setSessionLength] = useState(25)
   const [timeLeft, setTimeLeft] = useState({minutes: sessionLength, seconds: 0})
-  let start, time, minutes, seconds
 
   function handleStartStop(sessionLengthParameter) {
-    start = Date.now()
+    if(running===false){
+      running = true
+      start = Date.now()
+    } else running = false
     timerFunction(sessionLengthParameter*60)
   }
   function timerFunction(sessionLengthParameter) {
-    setInterval(() => {
-      time = sessionLengthParameter - (((Date.now() - start)/1000).toFixed(0))
-      minutes = Math.floor(time/60)
-      seconds = time-(minutes*60)
-      setTimeLeft(
-        {
-          minutes: minutes,
-          seconds: seconds
-        }
-      ) 
-    }, 1000);
+    if(running===true){
+      if(pausedOnce ===true){
+        totalTimeLeft = (timeLeft.minutes*60) + timeLeft.seconds
+      } else {
+        totalTimeLeft = sessionLengthParameter
+      }
+      timerInterval = setInterval(() => {
+        time = totalTimeLeft - (((Date.now() - start)/1000).toFixed(0))
+        minutes = Math.floor(time/60)
+        seconds = time-(minutes*60)
+        setTimeLeft(
+          {
+            minutes: minutes,
+            seconds: seconds
+          }
+        ) 
+      }, 1000);
+    } else {
+      clearInterval(timerInterval);
+      pausedOnce = true 
+    }
+    
+  }
+  function handleReset() {
+    setBreakLength(5);
+    setSessionLength(25);
+    setTimeLeft({minutes: sessionLength, seconds: 0})
+    if(running===true){handleStartStop(sessionLength)};
   }
 console.log(timeLeft)
 
@@ -42,7 +64,7 @@ console.log(timeLeft)
 
 
       <button id="start_stop" onClick={()=>handleStartStop(sessionLength)}>Start Stop</button>
-      <button id="reset" onClick={()=>{setBreakLength(5); setSessionLength(25)}}>reset</button>
+      <button id="reset" onClick={handleReset}>reset</button>
     </div>
   );
 }
