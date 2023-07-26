@@ -8,8 +8,8 @@ let switched = false;
 let currentState = "Session";
 
 function App() {
-  const [breakLength, setBreakLength] = useState(0.1);
-  const [sessionLength, setSessionLength] = useState(0.1);
+  const [breakLength, setBreakLength] = useState(5);
+  const [sessionLength, setSessionLength] = useState(25);
   const [timeLeft, setTimeLeft] = useState({
     minutes: sessionLength,
     seconds: 0,
@@ -41,7 +41,9 @@ function App() {
       function accurateIntervalFix() {
         let dt = Date.now() - expected; // the drift (positive for overshooting)
         if (dt > interval) {
-          alert("The window was inactive, please refresh the page.");
+          // Write something if you want to catch dt > interval
+          // possibly special handling to avoid futile "catch up" run
+          // alert("something something")
         }
         // code between the accurate interval fix starts here
         totalTimeInSeconds -= 1;
