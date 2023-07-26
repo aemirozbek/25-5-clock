@@ -1,18 +1,131 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+@import url('https://fonts.cdnfonts.com/css/lcd');
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-.App {
+body {
+  font-family: 'Varela Round', sans-serif;
+  background-color: #F8F8F8;
+  margin: 0;
   display: flex;
   justify-content: center;
-  margin-top: 20%;
+  align-items: center;
+  height: 100vh;
+}
+
+#title {
+  font-size: 50px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  padding: 30px 20px 10px 20px;
+  border-radius: 5px;
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+  text-align: center;
+  color: #444444;
+}
+
+.App {
+  background-color: #EFEFEF;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.267);
+  padding: 20px;
+  text-align: center;
+  width: 400px;
+  height: 340px;
+  border-radius: 100%;
+  padding-top: 60px;
+}
+
+#timer-label {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+#time-left {
+  font-size: 56px;
+  margin-bottom: 20px;
+}
+
+#timer-container {
+  font-family: 'LCD', sans-serif;
+  border: solid 2px rgb(185, 240, 243);
+  border-radius: 5px;
+  background-color: rgb(173, 231, 233);
+  padding: 10px 15px;
+  width: 150px;
+  margin: auto;
+  color: #444444;
+}
+
+#break-container,
+#session-container {
+  display: inline-block;
+  margin-top: 20px;
+  margin: 20px;
+}
+
+#break-label,
+#session-label {
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #444444;
+}
+
+#break-length,
+#session-length {
+  font-size: 24px;
+  display: inline;
+  color: #444444;
+}
+
+.increment-decrement {
+  display: inline;
+}
+
+
+#start-reset button {
+  background-color: #6CB2EB;
+  color: white;
+  font-size: 16px;
+  border: none;
+  padding: 10px 15px;
+  margin: 15px;
+  cursor: pointer;
+  border-radius: 100%;
+  width: 45px;
+  height: 45px;
+}
+
+.increment-decrement {
+  background-color: #6CB2EB;
+  border-radius: 100%;
+  margin: 5px;
+  border: none;
+  width: 30px;
+  height: 30px;
+  color: white;
+  cursor: pointer;
+}
+
+
+#start-reset button:hover {
+  background-color: #509edd;
+}
+
+button:hover {
+  background-color: #509edd;
+}
+
+button:active {
+  transform: translateY(2px);
+}
+
+#author {
+  color: #929292;
+  text-align: center;
+  margin-top: 30px;
+}
+
+#author a {
+  text-decoration: none;
+  color: #929292;
 }
